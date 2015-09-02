@@ -17,9 +17,14 @@
 		<% end %>
 	</ul>
 
-<p> <%= session[:user_name] %>'s TOTAL: </p>
-<p> <%= session[:player_total].inject(:+) %>
-<p>total here not working yet</p>
+<!-- DELETE, THIS IS JUST FOR TESTING -->
+<p> dEALER's hand</p>
+	<ul>
+		<% session[:dealer_hand].each do |card| %>
+		<li> <%= p card %> </li>
+		<% end %>
+	</ul>
+
 
 <form action="/hit_stay" method="post" class="form-inline">
 	<button class="btn btn-danger" name="hit">Hit</button>
