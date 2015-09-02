@@ -1,0 +1,27 @@
+<h3>Blackjack starts here</h3>
+<p> Player: <%= session[:user_name] %> </p>
+<p> Bet: <%= session[:bet_amount] %> </p>
+<br>
+
+<!-- <p>Dealer's hand</p>
+	<ul>
+		<% session[:dealer_hand].each do |card| %>
+		<li><%= p card %> </li>
+		<% end %>
+	</ul> -->
+
+<p> <%= session[:user_name] %>'s hand</p>
+	<ul>
+		<% session[:player_hand].each do |card| %>
+		<li> <%= p card %> </li>
+		<% end %>
+	</ul>
+
+<p> <%= session[:user_name] %>'s TOTAL: </p>
+<p> <%= session[:player_total].inject(:+) %>
+<p>total here not working yet</p>
+
+<form action="/hit_stay" method="post" class="form-inline">
+	<button class="btn btn-danger" name="hit">Hit</button>
+	<button class="btn btn-warning" name="stay">Stay</button>
+</form>
