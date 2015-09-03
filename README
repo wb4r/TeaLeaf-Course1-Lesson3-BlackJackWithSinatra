@@ -1,4 +1,5 @@
-1. Make sure the 'sinatra' gem is installed.
-2. From the command line, you can start the server by 'ruby main.rb'
-3. If you have the 'shotgun' gem installed, you can instead run 'shotgun main.rb'
-4. ctrl+c to stop the server
+I've tried to accomplish the objectives without looking at the solutions, and I succeded in almost everything after watching the first video on how to interact with the basic commands. 
+
+There is an option implemented, consequence of not viewing the videos before coding, that is unused. I thougth it had to be implemented aswell and in this version has no use at all: the betting option. 
+
+Thanks and enjoy
