@@ -1,32 +1,67 @@
-<h3>Blackjack starts here</h3>
-<p> Player: <%= session[:user_name] %> </p>
-<p> Bet: <%= session[:bet_amount] %> </p>
+<h1>Blackjack!</h1>
+<h4 class="h4-username"> Player: <%= session[:user_name] %> - Available ($): <%= session[:bet_amount] %> </h4>
 <br>
 
-<!-- <p>Dealer's hand</p>
-	<ul>
-		<% session[:dealer_hand].each do |card| %>
-		<li><%= p card %> </li>
-		<% end %>
-	</ul> -->
-
-<p> <%= session[:user_name] %>'s hand</p>
-	<ul>
-		<% session[:player_hand].each do |card| %>
-		<li> <%= p card %> </li>
-		<% end %>
-	</ul>
-
-<!-- DELETE, THIS IS JUST FOR TESTING -->
-<p> dEALER's hand</p>
-	<ul>
-		<% session[:dealer_hand].each do |card| %>
-		<li> <%= p card %> </li>
-		<% end %>
-	</ul>
+<!-- PLAYERS HAND-->
+<div class="well">
+	<h4><%= session[:user_name] %>'s hand</h4>
+		<ul class="thumbnails">
+			<% session[:player_hand].each do |card| %>
+			<li class="span4 card">
+				<div class="thumbnail">
+					<%= card_image(card) %> 
+					<% end %>
+				</div>
+			</li>
+		</ul> <!-- end of ul 'thumbnails' -->
+	<p> TOTAL: <%= session[:player_total] %> </p>
+</div> <!-- end of 'well' -->
 
 
-<form action="/hit_stay" method="post" class="form-inline">
-	<button class="btn btn-danger" name="hit">Hit</button>
-	<button class="btn btn-warning" name="stay">Stay</button>
-</form>
+<!-- DELAERS HAND-->
+<div class="well">
+	<h4> Dealer's hand</h4>
+		<ul class="thumbnails">
+			<% if @show_dealer_data %>
+				<% session[:dealer_hand].each do |card| %>
+				<li class="span4 card">
+					<div class="thumbnail">
+						<%= card_image(card) %> 
+					<% end %>
+					</div>
+				</li>
+			<%else%>
+				<li class="span4 card">
+					<div class="thumbnail">
+						<%= card_image(session[:dealer_hand][0]) %>
+					</div>
+				</li>
+				<li class="span4 card">
+					<div class="thumbnail">						
+						<img class='img-thumbnail' src='/images/cards/cover.jpg'>
+					</div>
+				</li>
+			<%end%>
+		</ul> <!-- end of ul 'thumbnails' -->
+	<% if @show_dealer_data %>
+		<p> TOTAL: <%= session[:dealer_total] %></p>	
+	<%end%>
+</div> <!-- end of 'well' -->
+<br>
+
+
+<!-- HIT / STAY BUTTONS -->
+<% if @show_hit_or_stay_btn %>
+	<form action="/ingame" method="post" class="form-inline">
+		<button class="btn btn-danger btn-mine hit" name="hit">Hit</button>
+		<button class="btn btn-success btn-mine stay" name="stay">Stay</button>
+	</form>
+<%end%>
+
+<% if @show_replay_btn %>
+<!-- REPLAY BUTTON -->
+	<h5></h5>
+	<form action="/new_game" method="get" class="form-inline">
+		<button class="btn btn-primary replay" name="replay">Replay</button>
+	</form>
+<%end%>

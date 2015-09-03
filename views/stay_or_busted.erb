@@ -3,6 +3,7 @@
 <p> Bet: <%= session[:bet_amount] %> </p>
 <br>
 
+<!-- PLAYERS -->
 <p> <%= session[:user_name] %>'s hand</p>
 	<ul>
 		<% session[:player_hand].each do |card| %>
@@ -11,7 +12,7 @@
 	</ul>
 <p> <%= session[:user_name] %>'s TOTAL: <%= session[:player_total].inject(:+) %> </p>
 
-<!-- DELETE, THIS IS JUST FOR TESTING -->
+<!-- DELAERS -->
 <p> Dealer's hand</p>
 	<ul>
 		<% session[:dealer_hand].each do |card| %>
@@ -20,7 +21,18 @@
 	</ul>
 <p> Dealer's TOTAL: <%= session[:dealer_total].inject(:+) %></p>
 
-<h5>Replay?</h5>
-<form action="/new_game" method="get" class="form-inline">
-	<button class="btn btn-primary" name="replay">Replay</button>
-</form>
+<!-- HIT / STAY BUTTONS -->
+<% if @show_hit_or_stay_btn %>
+	<form action="/hit_stay" method="post" class="form-inline">
+		<button class="btn btn-danger" name="hit">Hit</button>
+		<button class="btn btn-warning" name="stay">Stay</button>
+	</form>
+<%end%>
+
+<% if @show_replay_btn %>
+<!-- REPLAY BUTTON -->
+	<h5>Replay?</h5>
+	<form action="/game" method="get" class="form-inline">
+		<button class="btn btn-primary" name="replay">Replay</button>
+	</form>
+<%end%>
