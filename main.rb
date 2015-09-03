@@ -1,9 +1,10 @@
-
 require 'rubygems'
 require 'sinatra'
 require 'pry'
 
-set :sessions, true
+use Rack::Session::Cookie,  :key => 'rack.session',
+                            :path => '/',
+                            :secret => 'wzjfeno43634245mvaldise9r0373'
 
 # HELPERS
 
@@ -52,10 +53,11 @@ helpers do
   end
 
   def dealer_to_17 
-    begin
+    session[:dealer_total] = calculate_total(session[:dealer_hand])
+    while session[:dealer_total] < 17
       provide_card(:dealer_hand)
       session[:dealer_total] = calculate_total(session[:dealer_hand])
-    end until session[:dealer_total] >= 17
+    end
     session[:dealer_total]
   end
 
@@ -146,7 +148,7 @@ post '/ingame' do
         redirect '/player_won'
       end      
     elsif params['stay']
-      dealer_to_17 if calculate_total(session[:dealer_hand]) < 17
+      dealer_to_17
       redirect '/stayed'
     end
   else
