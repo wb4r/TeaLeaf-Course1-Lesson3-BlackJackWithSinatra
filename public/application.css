@@ -35,7 +35,7 @@ h1 {
 	text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 }
 .h4-username {
-	text-shadow: -1px 0 gray;
+	color: white;
 }
 
 .btn-mine {

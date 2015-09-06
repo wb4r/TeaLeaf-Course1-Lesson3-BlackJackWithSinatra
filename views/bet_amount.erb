@@ -1,6 +1,9 @@
-<h4 style="color: white;">Please, introduce the amount you want to bet</h4>
+
+<h4 style="color: white;"> <%= session[:user_name] %> has <%= session[:total_money] %>$</h4>
+<h5 style="color: white;">Make a bet for this round</h5>
 <br>
 <form action="/bet_amount" method="post" class="form-inline">
 	<input type="text" name="bet_amount" style="margin-bottom: 20px;">
 	<button class="btn btn-danger" style="margin-bottom: 20px;">Add Quantity</button>
 </form>
+
