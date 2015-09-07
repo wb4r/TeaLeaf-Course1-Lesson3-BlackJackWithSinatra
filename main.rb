@@ -44,7 +44,7 @@ helpers do
         total << card[1].to_i
       end
     end
-    while total.inject(:+) > 2111 && total.max == 11
+    while total.inject(:+) > 21 && total.max == 11
       total.sort!
       total.pop
       total << 1
@@ -170,22 +170,22 @@ get '/new_game' do
   first_hand  
   session[:player_total] = calculate_total(session[:player_hand])
   session[:dealer_total] = calculate_total(session[:dealer_hand])
-  if session[:player_total] == 2111
+  if session[:player_total] == 21
     redirect '/player_won'
   end
   erb :game
 end
 
 post '/ingame' do
-  if calculate_total(session[:player_hand]) < 2111
+  if calculate_total(session[:player_hand]) < 21
     if params['hit']
       provide_card(:player_hand)
       session[:player_total] = calculate_total(session[:player_hand])
-      if session[:player_total] < 2111
+      if session[:player_total] < 21
         redirect '/ingame'
-      elsif session[:player_total] > 2111
+      elsif session[:player_total] > 21
         redirect '/busted'
-      elsif session[:player_total] == 2111
+      elsif session[:player_total] == 21
         redirect '/player_won'
       end      
     elsif params['stay']
@@ -195,6 +195,7 @@ post '/ingame' do
   else
     redirect '/player_won'
   end
+  erb :game
 end
 
 get '/ingame' do 
@@ -209,7 +210,7 @@ get '/stayed' do
   @show_dealer_data = true
   session[:player_total] = calculate_total(session[:player_hand])
   session[:dealer_total] = calculate_total(session[:dealer_hand])
-  if session[:player_total] <= session[:dealer_total] && session[:dealer_total] < 2111
+  if session[:player_total] <= session[:dealer_total] && session[:dealer_total] < 21
     @winner = "dealer"
     redirect '/dealer_won'
   else

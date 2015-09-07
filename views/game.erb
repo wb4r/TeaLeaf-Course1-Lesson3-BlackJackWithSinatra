@@ -54,11 +54,11 @@
 	<!-- HIT / STAY BUTTONS -->
 	<% if @show_hit_or_stay_btn %>
 		<form id="hitform" action="/ingame" method="post" class="form-inline">
-			<button id="hit" class="btn btn-danger btn-mine hit" name="hit">Hit</button>
+			<button id="hitbtn" class="btn btn-danger btn-mine hit" name="hit">Hit</button>
 		<form id="stayform" action="/ingame" method="post" class="form-inline">
 		
 		</form>
-			<button class="btn btn-success btn-mine stay" name="stay">Stay</button>
+			<button id="staybtn" class="btn btn-success btn-mine stay" name="stay">Stay</button>
 		</form>
 	<%end%>
 
@@ -66,7 +66,7 @@
 	<!-- REPLAY BUTTON -->
 		<h5></h5>
 		<form action="/bet_amount" method="post" class="form-inline">
-			<button class="btn btn-primary replay" name="replay">Replay</button>
+			<button id="repbtn" class="btn btn-primary replay" name="replay">Replay</button>
 		</form>
 	<%end%>
 </div>
